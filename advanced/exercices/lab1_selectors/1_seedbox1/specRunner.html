@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Jasmine Test Runner</title>
+<link rel="stylesheet" type="text/css" href="./../../../lib/jasmine/jasmine.css">
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-jquery.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-html.js"></script>
+
+<script type="text/javascript" src="./../../../lib/jquery/jquery-1.7.js"></script>
+
+<script type='text/javascript' src='seedbox.js'></script>
+<script type='text/javascript' src='test.js'></script>
+<link rel="stylesheet" href="./../../../lib/labs.css"></link>
+<link rel="stylesheet" href="res/seedbox.css"></link>
+<script type="text/javascript" src="./../../../lib/testRunner.js"></script>
+
+<script>
+$(function() {
+	$("#generateSeeds").click(function() {
+		generateSeeds(20);
+	});
+});
+</script>
+
+</head>
+<body>
+
+<h2 class="onderwerp">
+	Lab 1: Gardening in the Seedbox
+</h2>
+
+<div class="beschrijving">
+
+<p>
+Since you are all now certified Gardening Masters &copy; - you may now buy and manage your own seeds. <br/>
+This is what you'll need to do:
+</p>
+
+
+<p>
+<ul>
+<li>At the left you can see your seedbox. This is where you'll need to manage your seeds</li>
+<li>You need to generate a set amount of seeds (the only argument to the function). This will have to be implemented in 'generateSeeds()'</li>
+<li>Each seed should create a corresponding 'seed' div (with the css class 'seed' on it), within the seedbox div.</li>
+<li>Next to the seed class, every seed should have one of the following classes randomly:
+	<ol>
+		<li>peashooter</li>
+		<li>pumpkin</li>
+		<li>cherrybomb</li>
+	</ol></li>
+<li>Don't forget to cleanup your seeds. We call 'cleanupSeeds' after each test.
+</ul>
+</p>
+
+</div>
+
+<hr class="sep"/>
+
+<form>
+<input type="button" id="generateSeeds" value="Generate my seeds!"></input>
+</form>
+<div id="seedbox"></div>
+
+<hr class="sep"/>
+
+<h3>Unit tests</h3>
+
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Jasmine Test Runner</title>
+<link rel="stylesheet" type="text/css" href="./../../../lib/jasmine/jasmine.css">
+<link rel="stylesheet" type="text/css" href="./../../../lib/labs.css"></script>
+
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-jquery.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-html.js"></script>
+
+<script type="text/javascript" src="./../../../lib/jquery/jquery-1.7.js"></script>
+<script type="text/javascript" src="flowers.js"></script>
+
+<script type='text/javascript' src='test.js'></script>
+<script type="text/javascript" src="./../../../lib/testRunner.js"></script>
+
+<script>
+$(function() {
+	$("#createPot").click(function() {
+		flowerpot();
+	});
+});
+</script>
+
+</head>
+<body>
+
+<h2 class="onderwerp">
+	Lab 4: jQuery and Jasmine combined
+</h2>
+
+<div class="beschrijving">
+<p>
+Implement this <strong>test-first</strong>! <br>
+I want to grow a flower inside a pot. I start out with a new flowerpot and I'm able to grow the plant by watering it. Let's assume it came with a tiny seed pre-filled.<br>
+After watering, it changes into a beautiful flower. You'll need to implement something like this:
+
+<pre class="code">
+var flowerpot = (function() {
+	function water() { ... }
+}); // notice I don't want to evaluate this yet, as it might add stuff into the DOM!
+</pre>
+
+When you've created a flowerpot, a corresponding div with class 'flowerpot' appears into the DOM tree (doesn't matter where). <br>
+Users can water the pot by clicking on it. Be sure to test these events! <br>
+A watered pot changes into a flower by changing it's class. You can write some CSS or use these images if you want:
+
+<img src="res/flowerpot.png"/>&nbsp;<img src="res/flower.png"/>
+</p>
+
+<p>
+<form>
+<input type="button" id="createPot" value="Create a flowerpot"></input>
+</form>
+</p>
+
+</div>
+</body>
+</html>
+

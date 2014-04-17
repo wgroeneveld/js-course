@@ -1,0 +1,26 @@
+#twitterContainer {
+	border: 1px dotted black;
+	margin: 15px;
+}
+
+.tweet {
+	background-color: grey;
+	border: 1px solid yellow;
+	color: white;
+	font-family: verdana;
+	font-size: 9pt;
+	clear: both;
+	margin-top: 10px;
+}
+
+.tweet img {
+	width: 100px;
+	height: 100px;
+}
+
+.timestamp {
+	float: right;
+	background-color: darkgreen;
+	border: 1px dotted lightgreen;
+	color: white;
+}

@@ -1,0 +1,18 @@
+
+#cow {
+	background: url('cow.png');
+	width: 410px;
+	height: 307px;
+	border: 1px solid black;
+	position: absolute;
+	z-index: 100;
+}
+
+#score {
+	border: 2px solid green;
+	color: black;
+	font-weight: bold;
+	font-size: 12pt;
+	font-family: verdana;
+	background-color: lightgreen;
+}

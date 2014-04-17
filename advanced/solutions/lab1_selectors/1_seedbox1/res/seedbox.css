@@ -1,0 +1,29 @@
+#seedbox {
+	width: 640px;
+	height: 480px;
+	border: 2px solid darkgreen;
+	background: url('seedbox_bg.jpg');
+	opacity: 0.7;
+}
+
+.peashooter {
+	background: url('seed.png');
+}
+
+.pumpkin {
+	background: url('seed3.png');
+}
+
+.cherrybomb {
+	background: url('seed2.png');
+}
+
+.seed {
+	width: 47px;
+	height: 68px;
+	z-index: 1;
+	border: 1px solid black;
+	position: relative;
+	float: left;
+	margin-left: 10px;
+}

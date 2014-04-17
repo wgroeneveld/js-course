@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <script type="text/javascript" src="./../../lib/jquery-1.6.min.js"></script>
+  <script type="text/javascript" src="./../../lib/qunit.js"></script>
+  <script type="text/javascript" src="zombies.js"></script>
+  <script type="text/javascript" src="zombiesTest.js"></script>
+  <link rel="stylesheet" href="./../../lib/qunit.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="./../../lib/oefeningen.css" type="text/css" media="screen" />
+
+</head>
+<body>
+
+<h2 class="onderwerp">
+	Lab 3: Zombies (revisited) are not eating politely
+</h2>
+
+<div class="beschrijving">
+
+<img src="zombie.jpg" alt="Copyright Popcap Games" align="right" style="border: 1px solid black;" />
+<P>
+So you've reduced an army to dust... But you forgot a few hungry zombies, and now they're eating stuff! Waargh!
+</P>
+
+<P>
+A zombie will <em>'eat'</em> anything which stands in their way - plants, strings, primitives, you name it. <br>
+Zombies don't like plain food, they like it with a lot of sauce! And they are not very polite eaters. Zombies can slurp, swallow whole chunks and feast upon things. 
+</P>
+
+<p>
+You'll need to build a zombie function which allows a zombie to eat ONE thing, with multiple sauces, on multiple "politeness" levels. 
+This function will behave similar to a <a href="http://en.wikipedia.org/wiki/Builder_pattern" target="_blank">builder pattern</a>. Instead of calling '<em>build()'</em>, you can use <em>'swallow()'</em>. 
+</p>
+
+<br/>
+This is a concrete example:
+
+<pre class="code">
+var unpoliteMeal = zombie()
+	.eat("pumpkin plant")
+	.with("extra virgin olive oil")
+	.slurping()
+	.feastingUpon()
+	.swallow();
+// unpoliteMeal === "zombie slurps and feats upon pumpkin plant with extra virgin olive oil"
+
+// public interface:
+var edible = {
+	with,
+	slurping,
+	swallow,
+	feastingUpon
+}
+
+function zombie() {
+	return {
+		eat: edible
+	};
+}
+</pre>
+
+<p>
+<strong>You can mix and match function calls</strong>! like so:
+
+<pre class="code">
+var unpoliteMeal = zombie().eat("pumpkin").slurping().with("mayo").feastingUpon().with("oil");
+// unpoliteMeal === "zombie slurps and feats upon pumpkin with mayo and oil
+</pre>
+
+<p>
+Different things will be separated with 'and' for politeness level and sauces. Don't forget to add the "with" word while appending the sauces. <br>.
+You <strong>should NOT be able to eat two things at once!</strong> So .eat("stuff").eat will be <em>undefined</em>. <br>
+If you're not sure what to do, please take a look at the tests for some examples. 
+</p>
+
+<p>
+Another tip: remember '<em>reduce()</em>'?
+</p>
+
+</div>
+<hr class="sep"/>
+
+  <h1 id="qunit-header">QUnit: Lab 3: More zombies</h1>
+ <h2 id="qunit-banner"></h2>
+ <div id="qunit-testrunner-toolbar"></div>
+ <h2 id="qunit-userAgent"></h2>
+ <ol id="qunit-tests"></ol>
+ <div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+</html>

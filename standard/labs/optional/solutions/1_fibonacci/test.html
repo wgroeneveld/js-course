@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <script type="text/javascript" src="./../../lib/jquery-1.6.min.js"></script>
+  <script type="text/javascript" src="./../../lib/qunit.js"></script>
+  <script type="text/javascript" src="fibonacci.js"></script>
+  <script type="text/javascript" src="fibonacciTest.js"></script>
+  <link rel="stylesheet" href="./../../lib/qunit.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="./../../lib/oefeningen.css" type="text/css" media="screen" />
+
+</head>
+<body>
+
+<h2 class="onderwerp">
+	Secret Extra Lab: Fibonacci
+</h2>
+
+<div class="beschrijving">
+<P>
+Given a Fibonacci row: 0, 1, 1, 2, 3, 5, 8, 13, 21, ...
+</P>
+
+<P>
+Implement this simple algorithm in Javascript. Make sure the <b>complexity isn't more than n!</b> 
+For the unit tests to work, you'll need to keep track of the fibonacci # runs on <i>window</i> scope - see QUnit source code. 
+</p>
+
+Public interface:
+
+<pre class="code">
+fibonacci(n); // implement me
+fiboCounter;  // get number of fibonacci() runs
+</pre>
+
+<p>
+Handy tips:
+
+<ol>
+<li>Start with the simplest thing possible (the algorithm, without worrying about complexity) Make sure some unit tests are green.</li>
+<li>Use <b>Closures</b> to keep track of what you've already calculated! You should <u>not</u> write this the "procedural" way.<br>
+	You'll only need 2 functions on window scope.</li>
+<li>Combine the previous tip with this one: the <a href="http://en.wikipedia.org/wiki/Decorator_pattern" target="_blank">Decorator pattern</a>.
+<li>Don't use <i>typeof()</i> but <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/hasOwnProperty" target="_blank">hasOwnProperty()</a>!</li>
+</ol>
+</p>
+
+<p>
+Change the individual unit test order. What happens? Can you explain this?
+<br>(It's not needed to reset the counter every time, happens in the tests when needed)
+</p>
+
+</div>
+<hr class="sep"/>
+
+  <h1 id="qunit-header">QUnit: Secret Extra Lab : Fibonacci</h1>
+ <h2 id="qunit-banner"></h2>
+ <div id="qunit-testrunner-toolbar"></div>
+ <h2 id="qunit-userAgent"></h2>
+ <ol id="qunit-tests"></ol>
+ <div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+
+#cow {
+	background: url('cow.png');
+	width: 410px;
+	height: 307px;
+	border: 1px solid black;
+	position: absolute;
+	z-index: 100;
+}

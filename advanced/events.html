@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<script src="lib/jquery/jquery-1.7.js"></script>
+
+</head>
+<body>
+	<script>
+		$(function() {
+			eval($('#propagationScript').html());
+		});
+	</script>
+	<h1>Propagation</h1>
+	<pre id="propagationScript" style="font-size:28px">
+	
+$('#parentOfParent').click(function (event){
+	$(this).css('background-color','blue')
+});
+	
+$('#parent').click(function (event){
+	$(this).css('background-color','green')
+});		
+	
+$('#innerDiv').click(function (event){
+	$(this).css('background-color','red')
+});
+
+	</pre>
+	<button id="resetColors">Reset colors</button><br/><br/>
+	ParentOfParent
+	<div id="parentOfParent" style="border: 2px solid black; padding:40px">
+		Parent
+		<div id="parent" style="border: 2px solid black; padding:40px">
+			Innerdiv
+			<div id="innerDiv" style="border: 2px solid black; padding:40px">
+				
+			</div>	
+		</div>
+	</div>
+
+	
+	
+	<script>
+		$(function() {
+		
+			function resetColors() {
+				$('div').css('background-color','white');
+			}
+			resetColors();
+			$('#resetColors').click(resetColors);
+		});
+	</script>
+</body>
+</html>

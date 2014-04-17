@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Jasmine Test Runner</title>
+<link rel="stylesheet" type="text/css" href="./../../../lib/jasmine/jasmine.css">
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-jquery.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-html.js"></script>
+
+<script type="text/javascript" src="./../../../lib/jquery/jquery-1.7.js"></script>
+
+<script type='text/javascript' src='twitter.js'></script>
+<script type='text/javascript' src='test.js'></script>
+<link rel="stylesheet" href="./../../../lib/labs.css"></link>
+<link rel="stylesheet" href="res/twitter.css"></link>
+<script type="text/javascript" src="./../../../lib/testRunner.js"></script>
+
+<script>
+$(function() {
+	$("#generateTweets").click(function() {
+		generateTweetsWithHardcodedData();
+	});
+});
+</script>
+
+
+</head>
+<body>
+
+<h2 class="onderwerp">
+	Lab 1: Twitter client - the Zombified version! 
+</h2>
+
+
+<div class="beschrijving">
+
+<p>
+Take out your twitter wall solution from lab 1. Do you remember the boring avatars we gave you? Yeah, those. <br>
+Well, let's make 'em better by <strong>zombifying</strong> them while hovering.
+</p>
+
+<p>
+<ul>
+<li>If you hover your mouse over an avatar, the avatar changes into a zombified version (just change the src of the image to <em>res/zombie.png</em>)</li>
+<li>If you hover away from the avatar, the avater changes back to normal.</li>
+</ul>
+</p>
+
+<p>
+Remember to use closure environments to capture the needed data!
+</p>
+
+</div>
+
+<hr class="sep"/>
+
+<form>
+<input type="button" id="generateTweets" value="Generate my tweets!"></input>
+</form>
+<div id="twitterContainer">
+</div>
+
+<hr class="sep"/>
+
+<h3>Unit tests</h3>
+
+</body>
+</html>
+

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Jasmine Test Runner</title>
+<link rel="stylesheet" type="text/css" href="./../../../lib/jasmine/jasmine.css">
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-jquery.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-html.js"></script>
+
+<script type="text/javascript" src="./../../../lib/jquery/jquery-1.7.js"></script>
+
+<script type='text/javascript' src='cow.js'></script>
+<script type='text/javascript' src='test.js'></script>
+<link rel="stylesheet" href="./../../../lib/labs.css"></link>
+<link rel="stylesheet" href="cow.css"></link>
+<script type="text/javascript" src="./../../../lib/testRunner.js"></script>
+
+<script>
+$(function() {
+	$("#startShooting").click(game.start);
+	$("#stopShooting").click(game.stop);
+
+});
+</script>
+
+</head>
+<body>
+
+<h2 class="onderwerp">
+	Lab 1: Shoot a cow
+</h2>
+
+<div class="beschrijving">
+<p>
+(No cows were harmed during the making of this exercice)
+</p>
+
+<p>
+Your assignment: 
+Create a <em>game</em> module with two public methods <em>start</em> and <em>stop</em>. The start method should immediately add a div with id <em>cow</em> to the document. Add the cow to the body, there is no container div in this excercise. After 1 second the cow should disapear. It should reappear 1 second later at another (random) location. 
+
+<br>
+Tips
+<ul>
+	<li>Use <a href="https://developer.mozilla.org/en/window.setInterval">setInterval</a> or <a href="https://developer.mozilla.org/en/window.setTimeout">setTimeout</a></li>
+	<li>The global <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Math">Math</a> object has methods for generating random numbers, rounding them,..</li>
+</ul>
+</div>
+
+<form>
+<input type="button" id="startShooting" value="Start shooting!"></input>
+<input type="button" id="stopShooting" value="Stop shooting!"></input>
+
+</form>
+
+<hr class="sep"/>
+
+<h3>Unit tests</h3>
+
+</body>
+</html>
+

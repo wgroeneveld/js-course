@@ -1,0 +1,74 @@
+#seedbox {
+	width: 640px;
+	height: 480px;
+	border: 2px solid darkgreen;
+	background: url('seedbox_bg.jpg');
+	opacity: 0.7;
+	float: left;
+}
+
+#lawn {
+	float: right;
+	width: 744px;
+	height: 490px;
+	border: 2px solid darkgreen;
+	background: url('lawn.png');
+	opacity: 0.9;
+}
+
+.peashooter {
+	background: url('seed.png');
+}
+
+.pumpkin {
+	background: url('seed3.png');
+}
+
+.cherrybomb {
+	background: url('seed2.png');
+}
+
+.plant {
+	width: 80px;
+	height: 90px;
+}
+
+.plant.peashooter {
+	background: url('seed_grown.png');
+}
+
+.plant.cherrybomb {
+	background: url('seed2_grown.png');
+}
+
+.plant.pumpkin {
+	background: url('seed3_grown.png');
+}
+
+.spot {
+	width: 80px;
+	height: 90px;
+	border: 3px solid white;
+	position: relative;
+	float: left; 
+	margin-left: 10px;
+	margin-top: 3px;
+}
+
+.spot.occupied {
+	border: 3px solid red !important;
+}
+
+.spot.available {
+	border: 3px solid green !important;
+}
+
+.seed {
+	width: 47px;
+	height: 68px;
+	z-index: 1;
+	border: 1px solid black;
+	position: relative;
+	float: left;
+	margin-left: 10px;
+}

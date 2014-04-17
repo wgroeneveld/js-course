@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Jasmine Test Runner</title>
+
+<script type="text/javascript" src="./../../../lib/jquery/jquery-1.7.js"></script>
+
+<script type='text/javascript' src='cow.js'></script>
+<link rel="stylesheet" href="./../../../lib/labs.css"></link>
+<link rel="stylesheet" href="res/cow.css"></link>
+
+<script>
+$(function() {
+	$("#startShooting").click(function() {
+		Object.create(game).start();
+	});
+});
+</script>
+
+</head>
+<body>
+
+<h2 class="onderwerp">
+	Lab 2: Shoot a cow part III: blowing up the cow!
+</h2>
+
+<div class="beschrijving">
+<p>
+Start from your second lab cow exercise. In this part we'll be adding a nice "explosion" effect when you've shot the cow. You'll need to:
+</p>
+
+<p>
+<ul>
+<li>Create an explosion when the cow has been hit (simply replacing the background url is enough, see res/explosion.jpg)</li>
+<li>The explosion should... You know, explode. See <a href="http://api.jquery.com/category/effects/" target="_blank">jQuery Effects API</a>. Make up your own transition using animate()!</li>
+</ul>
+</p>
+
+<p>
+There are no tests present for this exercice, it's more of a "sandbox" where you can fool around with animate() for as long as you like.
+</p>
+
+</div>
+
+<form>
+Shoot the cow - your score: <input type="text" id="score"></input>
+<input type="button" id="startShooting" value="Start shooting!"></input>
+</form>
+
+<hr class="sep"/>
+
+</body>
+</html>
+

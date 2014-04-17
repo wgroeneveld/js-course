@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Jasmine Test Runner</title>
+<link rel="stylesheet" type="text/css" href="./../../../lib/jasmine/jasmine.css">
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-jquery.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-html.js"></script>
+
+<script type="text/javascript" src="./../../../lib/jquery/jquery-1.7.js"></script>
+
+<script type='text/javascript' src='twitter.js'></script>
+<script type='text/javascript' src='utils.js'></script>
+<script type='text/javascript' src='test.js'></script>
+<link rel="stylesheet" href="./../../../lib/labs.css"></link>
+<link rel="stylesheet" href="res/twitter.css"></link>
+<script type="text/javascript" src="./../../../lib/testRunner.js"></script>
+
+<script>
+$(function() {
+	var wall;
+		
+	$("#generateTweets").click(function() {
+		if(!wall) {
+			wall = Object.create(twitter);
+		}
+		
+		wall.addTweets([
+			utils.generateTweet(),
+			utils.generateTweet()
+		]);
+	});
+});
+</script>
+
+
+</head>
+<body>
+
+<h2 class="onderwerp">
+	Lab 1: Twitter client part III - rotating the tweets on the wall
+</h2>
+
+
+<div class="beschrijving">
+
+<p>
+Take out your twitter wall solution from lab 2. Again, it's time to rewrite it into a module with this interface:
+
+<pre class="code">
+var twitter = {
+	addTweets: function(tweetArray) { ... }
+};
+</pre>
+
+Nothing more than that. The function addTweets now does more than merely displaying them in the twitterContainer:
+<ul>
+	<li>Tweets will be <strong>rotating</strong>: if more than 3 tweets are visible, the oldest ones will slowly fade away.</li>
+	<li>There can never be more than 3 tweets displayed.</li>
+	<li>So: calling addTweets twice should rotate old tweets out and display the new ones.</li>
+</ul>
+
+You can safely assume the tweetArray will never contain more than 3 elements. <br>
+Don't forget to remove unneeded elements from the DOM tree using <em>.remove()</em>!
+</p>
+
+</div>
+
+<hr class="sep"/>
+
+<form>
+<input type="button" id="generateTweets" value="Add two tweets!"></input>
+</form>
+<div id="twitterContainer">
+</div>
+
+<hr class="sep"/>
+
+<h3>Unit tests</h3>
+
+</body>
+</html>
+

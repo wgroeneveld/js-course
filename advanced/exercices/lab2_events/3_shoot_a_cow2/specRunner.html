@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Jasmine Test Runner</title>
+<link rel="stylesheet" type="text/css" href="./../../../lib/jasmine/jasmine.css">
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-jquery.js"></script>
+<script type="text/javascript" src="./../../../lib/jasmine/jasmine-html.js"></script>
+
+<script type="text/javascript" src="./../../../lib/jquery/jquery-1.7.js"></script>
+
+<script type='text/javascript' src='cow.js'></script>
+<script type='text/javascript' src='test.js'></script>
+<link rel="stylesheet" href="./../../../lib/labs.css"></link>
+<link rel="stylesheet" href="cow.css"></link>
+<script type="text/javascript" src="./../../../lib/testRunner.js"></script>
+
+<script>
+$(function() {
+	$("#startShooting").click(function() {
+		game.start();
+	});
+	$("#stopShooting").click(function() {
+		game.stop();
+	});
+});
+</script>
+
+</head>
+<body>
+
+<h2 class="onderwerp">
+	Lab 2: Shoot a cow revisited - the shooting itself.
+</h2>
+
+<div class="beschrijving">
+<p>
+Right, so an ugly cow is floating around in your browser window. Let's implement the events required to "shoot" it!
+</p>
+
+<p>
+Your assignment: 
+<ul>
+<li>As a player, I can click on the cow image when it's visible and increase my score counter</li>
+<li>When I didn't manage to shoot the cow on time, my score is substracted by one. (Yes it can be negative)</li>
+<li>I can see my actual score at any time in the score input field.</li>
+<li>When I've shot the cow, it disappears but the game does not stop just yet.</li>
+</ul>
+</p>
+
+<p>
+Add getScore to your module from the previous lab as public method.
+
+<pre class="code">
+var game = {
+   start: ...,
+   stop: ...,
+   getScore: ...
+};
+</pre>
+
+</p>
+
+</div>
+
+<form>
+Shoot the cow - your score: <input type="text" id="score"></input>
+<input type="button" id="startShooting" value="Start shooting!"></input>
+<input type="button" id="stopShooting" value="Stop shooting!"></input>
+
+</form>
+
+<hr class="sep"/>
+
+<h3>Unit tests</h3>
+
+</body>
+</html>
+
