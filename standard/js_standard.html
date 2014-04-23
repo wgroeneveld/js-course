@@ -1,0 +1,860 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JavaScript as a dynamic, functional language</title>
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>JavaScript</h1>
+					<h3>as a dynamic, functional language</h3>
+					<p>
+						<small>Wouter Groeneveld</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Contents</h2>
+					<p>
+						<ol>
+							<li>Context</li>
+							<li>Primitives &amp; objects</li>
+							<li>Prototypal inheritance</li>
+							<li>Functions &amp; closures</li>
+							<li>Scopes &amp; contexts</li>
+						</ol>
+					</p>
+					<p>
+						Today we will talk about JS as a <strong>language</strong>. <br/>
+						We will not talk about JS as a way to manipulate the <strong>DOM</strong>.
+					</p>
+				</section>
+
+				<section>
+					<h2>How JS is used :-(</h2>
+					<p>
+						<pre><code>
+function oops() {
+  doStuff();
+  i = 10;
+  copyPasta(this.i, 20);
+}
+
+function copypasta(i, j) {
+  alert(new Date(i).getTime());
+  return j;
+}
+
+<a onclick="oei();">lala</a>
+						</code></pre>
+					</p>
+					<p>Javascript is just like java!</p>
+				</section>
+				<section>
+					<h2>How JS can be used used :-)</h2>
+					<p>
+						<pre><code>
+$(document).ready(function() {
+  $(“#link”).click(MyStuff.oei);
+});
+
+var MyStuff = (function() {
+  function privateStuff() { ... }
+  return {
+    oei: function() {
+      ...
+    }
+  };
+})();
+<a id="link">lala</a>
+						</code></pre>
+					</p>
+					<p>Javascript is <em>completely different</em> from java!</p>
+				</section>
+				<section>
+					<h2>Primitives &amp; objects</h2>
+				</section>
+				<section>
+					<h2>Variable declaration</h2>
+					<pre><code>
+var variabele = 5;
+var hello = "hello";
+
+var 1 = “one”; 	   // syntax error 
+var _ = “omgh4x”; // ok
+					</code></pre>
+
+					<h2>Primitives</h2>
+					<ol>
+						<li>number</li>
+						<li>string</li>
+						<li>boolean</li>
+					</ol>
+
+					<p>immutable &amp; case sensitive!</p>
+				</section>
+				<section>
+					<h2>Special values</h2>
+					<h4>undefined</h4>
+
+					<pre><code>
+var a;
+a === undefined;
+					</code></pre>
+
+					<h4>null</h4>
+					<pre><code>
+var a = null;
+a === null;
+					</code></pre>
+					<h4>NaN</h4>
+					<pre><code>
+isNaN(parseInt(“granny”)) === true
+					</code></pre>
+					<h4>Infinity</h4>
+					<pre><code>
+1 / 0 === Infinity
+					</code></pre>
+				</section>
+				<section>
+					<h2>"typeof" keyword</h2>
+
+					<p>returns strings:</p>
+					<ul>
+						<li>object</li>
+						<li>function</li>
+						<li>string</li>
+						<li>boolean</li>
+						<li>number</li>
+						<li>undefined</li>
+					</ul>
+				</section>
+				<section>
+					<h2>string utils</h2>
+
+					<code><pre>
+str.split
+str.indexOf
+str.replace(regex)
+str.toLowerCase
+//...
+					</code></pre>
+
+					See <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" target="_blank">https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String</a>. 
+				</section>
+				<section>
+					<h2>Objects: a map of key/values</h2>
+
+					<img src="img/objectmaps.png" style="float: left;" />
+					<span style="float: right;">value can be a number, string, object, function</span>
+
+				</section>
+				<section>
+					<h2>ways to create objects</h2>
+					<h3>literal</h3>
+					<code><pre>
+var location = {
+  x: 3,
+  y: 4,
+  distanceTo: function () {
+    var dx = this.x + this.y;
+    return Math.sqrt(dx);
+  }
+}
+					</code></pre>
+
+					<h3>new Object()</h3>
+					<code><pre>
+var location = new Object();
+location.x = 3;
+location.y = 4;
+location.distanceTo = function () { … };
+					</code></pre>
+				</section>
+				<section>
+					<h2>ways to create objects</h2>
+					<h3>Literal object syntax</h3>
+
+					<code>key : value,</code> and not <code>key = value1;</code>
+
+					<code><pre>
+// this:
+var obj = {
+  key1: value1,
+  key2: function () {..},
+  key3: value3
+};
+
+// not this:
+var obj = {
+  key1 = value1;
+  function key2(){..};
+  key3 = value3;
+};
+
+					</code></pre>
+				</section>
+				<section>
+					<ul>
+						<li>read: <br/>
+<code><pre>
+console.log(location.x);
+console.log(location[‘x’];
+</code></pre>
+						</li>
+						<li>iterate: <br/>
+<code><pre>
+for (var key in location) {
+  console.log(location[key]);
+}
+</code></pre>
+						</li>
+						<li>add: <br/>
+<code><pre>
+location.z = 1;
+location[‘z’] = 1;
+</code></pre>
+						</li>
+						<li>modify: <br/>
+<code><pre>
+location.x = 43;
+location[‘x’] = 43;
+</code></pre>
+						</li>
+						<li>delete: <br/>
+<code><pre>
+delete location.z;
+delete location[‘zumba’];
+</code></pre>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Functions</h2>
+					<h3>function</h3>
+<code><pre>
+function aFunction(name) {
+  console.log("Hello, " + name);
+}
+</code></pre>
+					<h3>function literals</h3>
+<code><pre>
+var aFunction = function(name) {
+  console.log("Hello, " + name);
+}
+</code></pre>
+					<p>
+						Both definitions are equivalent!
+					</p>
+				</section>
+				<section>
+					<h2>function arguments</h2>
+<code><pre>
+function wow() {
+  console.log(arguments[1]);
+} 
+
+wow("jos", "lowie"); // prints "lowie"
+</code></pre>					
+				</section>
+				<section>
+					<h2>creating an object using a function</h2>
+<code><pre>
+function createPoint(x,y) {
+  return {
+    x: x,
+    y: y,
+    distanceTo: function (otherPoint) {
+      return Math.sqrt(...);
+    }
+  };
+}
+</code></pre>					
+				</section>
+				<section>
+					<h2>Arrays</h2>
+
+					<p>
+						<code>var arr = ["a", "b", "c"];</code>
+					</p>
+
+					<h3>iterating</h3>
+<code><pre>
+x.forEach(function(i) {
+   console.log(i);
+});
+ 
+for(var i = 0; i < ...)
+</code></pre>					
+				</section>
+				<section>
+					<h2>Array utility functions</h2>
+<code><pre>
+arr.length
+arr.push, pop
+arr.splice, slice
+arr.shift, unshift
+arr.sort
+arr.filter, arr.map
+// ...
+</code></pre>			
+					<p>See <a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" target="_blank">https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array</a>.
+				</section>
+				<section>
+					<h2>An array is just an object</h2>
+<code><pre>
+var objArr = {
+  0: “dog”,
+  1: “cat”
+};
+ 
+var arr = [ “dog”, “cat” ];
+for(a in arr){console.log(a)}; 
+</code></pre>					
+					<p>What does the code above do?</p>
+				</section>
+				<section>
+					<h1>LAB 1</h1>
+					<img src="img/jasmine.png"/>
+				</section>
+				<section>
+					<h1>Prototypal inheritance</h1>
+				</section>
+				<section>
+					<h2>Prototypes</h2>
+
+					<p>
+						<img src="img/prototypes_ref.png"/>
+					</p>
+					<p>
+						Object refers to another object (it's <em>prototype</em>).
+					</p>
+
+					<h3>Looking for a property</h3>
+					<p>
+						First in own object, then further down the chain.
+					</p>
+
+					<h3>Changing a property</h3>
+					<p>
+						Always in own object. (modify, delete)
+					</p>
+				</section>
+				<section>
+					<h2>How is this different from class inheritance? (Java, C#)</h2>
+
+					<p>
+						<ul>
+							<li>classes don’t typically change at runtime</li>
+							<li>difference between inheriting methods and fields</li>
+							<li>difference between instance of class and class</li>
+						</ul>
+					</p>
+				</section>
+				<section>
+					<h2>Object.create()</h2>
+<code><pre>
+var point = {
+  distanceTo: function(otherPoint) {
+    return Math.sqrt(...);
+  }
+};
+  
+var point1 = Object.create(point);
+point1.x = 3;
+point1.y = 4;
+var point2 = Object.create(point);
+</code></pre>					
+
+				</section>
+				<section>
+					<h3>Prototype = object, so can be changed</h3>
+<code><pre>
+var proto = {
+  wow: “wow man!”
+};
+
+var obj = Object.create(proto);
+console.log(obj.wow);
+
+proto.wow = “mind is blown”;
+console.log(obj.wow);
+</code></pre>					
+				<h3>Changing internal objects</h3>
+<code><pre>
+Array.prototype.addFirstTwo = function () {
+  return this[0] + this[1];
+}
+[1,2].addFirstTwo();
+</code></pre>					
+
+			Be careful with this!
+
+				</section>
+				<section>
+					<h1>LAB 2</h1>
+					<img src="img/jasmine.png"/>
+				</section>
+				<section>
+					<h1>Closures</h1>
+				</section>
+				<section>
+					<h2>Closures - definition</h2>
+
+					<blockquote>"a function that retains the environment in which it is created"</blockquote>
+
+					<p>
+						Function inside a function<br/>
+						<img src="img/closures1.png"/>
+					</p>
+					<p>
+						Has access to variables from declared scope
+						<img src="img/closures2.png"/>
+					</p>
+					<p><code>functieX(7)()</code> - What happens?
+				</section>
+				<section>
+					<h2>Closures - definition</h2>
+
+					<blockquote>"a function that retains the environment in which it is created"</blockquote>
+
+					<p>
+						<img src="img/closures3.png"/>
+					</p>
+					<p>
+						when functieY is called, a <strong>new environment</strong> is created for the local variables and parameters.
+					</p>
+					<p>
+						when looking for a variable, it will first look in this new environment, next it will look in the environment it has retained.
+					</p>
+				</section>
+				<section>
+					<h2>Closures - definition</h2>
+
+					<img src="img/closures_newenv.png"/>
+					<p>
+						every time you call a function, a <strong>new</strong> environment is created.
+					</p>
+				</section>
+				<section>
+					<h1>LAB 3</h1>
+					<img src="img/jasmine.png"/>
+				</section>
+				<section>
+					<h1>Scope</h1>
+				</section>
+				<section>
+					<blockquote>So... for how long is an <strong>environment</strong> used?</blockquote>
+
+					or differently put:
+
+					<blockquote>For how long is the <strong>scope</strong> of a variable valid?</blockquote>					
+
+					Javascript does not have <em>block level</em> but <strong>function level scope</strong>!
+				</section>
+				<section>
+					<h3>Block level scope (Java, C#)</h3>
+<code><pre>
+public void Test() {
+   if (1 == 1) {
+     var x = 4;
+   }
+   Debug.WriteLine(x); //error
+}
+</code></pre>					
+					<h3>function level scope (Javascript)</h3>
+<code><pre>
+function test() {
+  if (1 === 1) {
+    var x = 4;
+  }
+  console.log(x); // prints 4
+</code></pre>					
+				</section>
+				<section>
+					<h2>Hoisting</h2>
+
+					Local variables are automatically "pulled up":
+<code><pre>
+var a = 3;
+function f() {
+  console.log(a);
+  var a = 5;
+} 
+</code></pre>					
+
+				becomes:
+<code><pre>
+var a = 3;
+function f() {
+  var a;
+  console.log(a); //prints undefined not 3
+  a = 5;
+} 
+</code></pre>					
+				</section>		
+				<section>
+					<h2>Hoisting - best practice</h2>
+					<h3>define variables @ start of function</h3>
+
+<code><pre>
+function a() {
+  var a, b, c, ...;
+  ...  
+  a = 5;
+} 
+</code></pre>
+
+				<p>	
+					This makes it clearer what’s going on. <br/>
+					JSLint will give a warning if you don’t do this.				
+				</p>
+			</section>
+			<section>
+				<h2>Scope chaining</h2>
+
+				<p>Toplevel scope = <code>window</code>!</p>
+				<p>
+					<code><pre>
+w = 6; // same as ‘window.w = 6;’
+	 // same as ‘var w = 6;’
+
+function F() {
+  var X = 55;
+  var Z = 10;
+
+ function FinF(){
+    var X = 50;
+    var Y = 60;
+ }
+}
+					</code></pre>
+				</p>
+			</section>
+			<section>
+				<img src="img/toplvlscope_arrows.png" />
+			</section>
+			<section>
+				<h1>Encapsulation</h1>
+			</section>
+			<section>
+				<h2>Remember closures?</h2>
+				<img src="img/closures2.png"/>
+
+				<p>an environment is "private".<br/>
+					We can use this to encapsulate variables.</p>
+			</section>
+			<section>
+				<h2>"private" variables for an object</h2>
+
+				<code><pre>
+function createPerson() {
+  var name = 'Jos';
+  return {
+    getName: function() {
+      return name;
+    },
+    setName: function(x) {
+      name = x;
+    }
+  };
+}
+				</code></pre>
+
+				<code>name</code> is inaccessible outside the function scope:
+
+				<code><pre>
+var persoon = createPersoon();
+persoon.getName(); // === “Jos”
+persoon.name // === undefined
+				</code></pre>
+			</section>
+			<section>
+				<h2>I heard you like closures...</h2>
+				... So I put a closure in a closure so you can wrap while you wrap.
+
+				<code><pre>
+function moduleCreator() {
+  function createPerson() {
+    var name = 'Jos';
+    return {
+      getName: function() {…}
+    };
+  }
+
+  // createDog is not exposed
+  function createDog() {…}
+
+  return {
+    createPerson: createPerson 
+  }
+}
+var MOD = moduleCreator();
+var person = MOD.createPerson();
+				</code></pre>
+			</section>
+			<section>
+				<h2>module pattern</h2>
+				<blockquote><code>(function(){})();</code></blockquote>
+
+				<p>
+					When to use a module?
+					<ul>
+						<li>Avoid pollution of global namespace</li>
+						<li>Duplication</li>
+						<li>Plugin, framework, ...</li>
+						<li>Reuse (component-based)</li>
+					</ul>
+				</p>
+				<p>
+					When not to use a module
+					<ul>
+						<li>Code that is used only once on a single page</li>
+						<li>Not a lot of code, not a lot of pollution</li>
+					</ul>
+				</p>
+				<p>
+					Keep it SIMPLE!
+				</p>
+			</section>
+			<section>
+				<code><pre>
+function emulateBlockLevelScope() {
+  var a = 5;
+  if(a === 5) {
+    (function () {
+      var b = 555;
+    })();
+  } 
+  console.log(b); 
+}
+			</code></pre>
+			</section>					
+			<section>
+				<h1>Context in function</h1>
+			</section>
+			<section>
+				<code><pre>
+function standaloneDistanceTo(otherPoint) {
+  return this.x + this.y;
+}
+var point1 = {
+  x: 1,
+  y: 1,
+  distanceTo: standaloneDistanceTo
+}
+var point2 = {
+  x: 2,
+  y: 2,
+  distanceTo: standaloneDistanceTo
+}
+			</code></pre>
+			<p>
+				What does <code>this</code> refer to?
+			</p>
+		</section>
+		<section>
+			<h3>this is determined when calling function</h3>
+
+				<code><pre>
+point1.distanceTo(point2); 		// this = point1
+point2.distanceTo(point1); 		// this = point2
+standaloneDistanceTo(point1);	// this = window (global obj in JS)
+			</code></pre>
+
+			<h3>this can be explicitly passed when calling a function</h3>
+				<code><pre>
+standaloneDistanceTo.apply(point1, [point2]);		// this = point1
+standaloneDistanceTo.call(point1, point2);			// this = point1
+			</code></pre>
+		</section>
+		<section>
+			<h2>Using this in callbacks</h2>
+
+				<code><pre>
+var person = {
+  name: "jos",
+  shout: function() {
+    alert(“hey, ” + this.name);
+  }
+}
+
+setTimeout(person.shout, 1000);
+			</code></pre>
+
+			<p>
+				Why doesn't this work? - look at it from the point of view of <code>setTimeout()</code>:
+			</p>
+				<code><pre>
+function setTimeout(myCallback,millis) {
+  //wait for millis
+  myCallback();
+}
+			</code></pre>
+
+			<p>
+				this will be bound to window object because myCallback is called as a standalone function.
+				<br/><strong>How do we fix this?</strong>
+			</p>
+		</section>
+		<section>
+			<h2>Use a closure</h2>
+				<code><pre>
+var person = {
+  name: "jos",
+  shout: function() {
+    alert(“hey,” + this.name);
+  }
+}
+
+setTimeout(function() {
+  person.shout()
+}, 1000);
+			</code></pre>	
+		</section>
+		<section>
+			<h2>Use bind method on function</h2>
+				<code><pre>
+var person = {
+  name: "jos",
+  shout: function() {
+    alert(“hey, ” + this.name);
+  }
+}
+
+setTimeout(person.shout.bind(person), 1000);
+			</code></pre>	
+		</section>
+				<section>
+					<h1>LAB 4</h1>
+					<img src="img/jasmine.png"/>
+				</section>
+				<section>
+					<h1>Using the new operator<h1>
+				</section>
+				<section>
+					<h2>new operator: constructor functions</h2>
+			<img src="img/newop.png"/>
+
+<code><pre>
+var jos = new Person();
+</code></pre>					
+
+is the same as
+
+<code><pre>
+var jos = Object.create(Person.prototype);
+Persoon.call(jos);
+</code></pre>					
+				</section>
+				<section>
+					<h2>new operator: constructor functions</h2>
+
+<code><pre>
+function Person() {
+  this.name = “jos”; 
+  // no return statement
+} 
+Person.prototype.talk = function () {...}
+
+var jos = new Person();
+jos.name === “jos";
+jos.talk();
+</code></pre>					
+
+				</section>
+				<section>
+					<h2>instanceof</h2>
+
+<code><pre>
+var jos = new Person();
+ 
+jos instanceof Person === true; 
+
+// is same as:
+Person.prototype.isPrototypeOf(jos) 
+</code></pre>					
+
+			Best practice: use <code>Object.isPrototypeOf()</code>! Why? It might look like class-based inheritance but it's still prototypal inheritance!. 
+				</section>
+				<section>
+					<h2>misc: equality and identity</h2>
+
+					<h3>Why do we use === instead of == ?</h3>
+
+					<p>
+						The <strong>Equality operator</strong>(==) tries to cast both sides to the same type, resulting in "falsy/truthy" confusing outcomes.
+					</p>
+					<img src="img/equality.png"/>
+				</section>
+				<section>
+					<h2>misc: ECMAScript?</h2>
+
+					<blockquote>ECMA = European Computer Manufacturers Association = Standardisation</blockquote>
+					<p>
+						Modern browsers implement EcmaScript 5+ = Javascript 8+
+					</p>
+					<p>
+						For IE&lt;9 use ES5 shim: <a href="https://github.com/kriskowal/es5-shim" target="_blank">https://github.com/kriskowal/es5-shim</a>.
+					</p>
+				</section>
+				<section>
+					<h1>More</h1>
+
+					<h3><a href="http://brainbaking.com/wiki/code/javascript/home" target="_blank">http://brainbaking.com/wiki/code/javascript/home</a></h3>
+
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
