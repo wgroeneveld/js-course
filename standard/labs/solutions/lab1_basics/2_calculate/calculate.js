@@ -7,8 +7,8 @@ var calculate = function(string) {
   };
  
   if(string.indexOf(" ") < 0) {
-    return new Number(string);
+    return parseInt(string);
   }
   var stringSplit = string.split(" ");
-  return operations[stringSplit[1]](new Number(stringSplit[0]), new Number(stringSplit[2]));
+  return operations[stringSplit[1]](parseInt(stringSplit[0]), parseInt(stringSplit[2]));
 };

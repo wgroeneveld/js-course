@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="shortcut icon" type="image/png" href="./../../lib/jasmine-1.3.1/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="./../../lib/jasmine-1.3.1/jasmine.css">
+  <link rel="stylesheet" type="text/css" href="./../../lib/oefeningen.css">  
+  <script type="text/javascript" src="./../../lib/jasmine-1.3.1/jasmine.js"></script>
+  <script type="text/javascript" src="./../../lib/jasmine-1.3.1/jasmine-html.js"></script>
+
+  <!-- include source files here... -->
+  <script type="text/javascript" src="filter.js"></script>
+
+  <!-- include spec files here... -->
+  <script type="text/javascript" src="filterSpec.js"></script>
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
+</head>
+
+<body>
+  <h2 class="onderwerp">
+  Lab 3: filtering on age
+</h2>
+
+<div class="beschrijving">
+
+<P>
+  We've got an array of persnos with different ages. We would like to easily retrieve people who are 
+  younger or older than a certain age. Write the functions <em>isYoungerThan</em> en <em>isOlderThan</em> which'll act as your filter function. 
+  <i>Don't loop over the array yourself! (You're doing it wrong)</i>
+
+  See examples below:
+</P>
+
+<pre class="code">
+  var jan = {name: 'jan', age: 20};
+  var piet = {name: 'piet', age: 30};
+  var joris = {name: 'joris', age: 40};
+  var korneel = {name: 'korneel', age: 50};
+  var people = [jan,piet,joris,korneel];
+
+  people.filter(isYoungerThan(35)); // -> [jan, piet]
+  people.filter(isOlderThan(35)); // -> [joris, korneel]
+</pre>
+
+
+</div>
+<hr class="sep"/>
+
+</body>
+</html>
