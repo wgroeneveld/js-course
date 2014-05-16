@@ -1,6 +1,6 @@
 
 var seed = {
-	generation: undefined,
+	generation: 1,
     sow: function() {
 		var newPlant = Object.create(plant);
 		newPlant.seed = this;
@@ -11,8 +11,11 @@ var seed = {
 var plant = {
 	seed: undefined,
 	grow: function() {
-		var newSeed = Object.create(this.seed);
-		newSeed.generation = (this.seed.generation === undefined ? 1 : this.seed.generation) + 1;
+		
+		var newSeed = Object.create(seed);
+
+
+		newSeed.generation = this.seed.generation + 1;
 		return newSeed;
 	}
 };
